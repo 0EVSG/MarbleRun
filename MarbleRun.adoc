@@ -1,15 +1,17 @@
-Introduction
-============
+= MarbleRun Keyboard Layout
+Florian Walpen <dev@submerge.ch>
+:toc:
 
 Marble Run is an alternative keyboard layout for standard keyboards, designed to improve the typing experience for both english text and programming.
 Its overall goal is to minimize the total typing work expected for these kind of texts.
 As with any optimization the outcome is primarily shaped by the evaluation function, which is the typing work estimation here.
 Unlike simpler approaches, the typing work model used to find Marble Run is based on the bigram frequencies of all symbols involved, including upper case letters and special characters.
 This allows for a sophisticated typing work estimate that also takes additional presses of the shift key into account.
+
 Features:
+
 * The most often typed letters are in easily reachable positions.
 * Minimizes the occurrence of same finger usage and similar interrupting patterns.
 * Favors hand alternation and convenient typing patterns (rolls) in the same hand.
 * Special characters often used in programming languages are placed according to their frequency.
-
 
