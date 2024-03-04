@@ -2,16 +2,55 @@
 Florian Walpen <dev@submerge.ch>
 :toc:
 
-Marble Run is an alternative keyboard layout for standard keyboards, designed to improve the typing experience for both english text and programming.
-Its overall goal is to minimize the total typing work expected for these kind of texts.
-As with any optimization the outcome is primarily shaped by the evaluation function, which is the typing work estimation here.
-Unlike simpler approaches, the typing work model used to find Marble Run is based on the bigram frequencies of all symbols involved, including upper case letters and special characters.
-This allows for a sophisticated typing work estimate that also takes additional presses of the shift key into account.
+== Introduction
 
-Features:
+MarbleRun presents a novel keyboard layout tailored for standard keyboards, aiming to enhance typing efficiency across English text and programming contexts.
+The primary objective of MarbleRun is to reduce the overall typing effort required.
+Its layout prioritizes hand alternation and facilitates smooth finger rolls during typing sequences.
+Optimized using a sophisticated typing work model based on hand anatomy, this results in a comfortable and ergonomic typing experience.
 
-* The most often typed letters are in easily reachable positions.
-* Minimizes the occurrence of same finger usage and similar interrupting patterns.
-* Favors hand alternation and convenient typing patterns (rolls) in the same hand.
-* Special characters often used in programming languages are placed according to their frequency.
+=== The Layout
+
+image::MarbleRun.png[]
+
+MarbleRun differs substantially from the standard QWERTY keyboard layout:
+
+* Alphabet letters are placed in a completely different order.
+* Comparison and logic symbols are consolidated in the number row.
+* Underscores and asterisks are relocated to the alphabet rows.
+* Parentheses, brackets and punctuation change both position and shift partners.
+
+Although some adjustments were made manually, the primary arrangement within the alphabet rows was determined through a heuristic search across all possible layouts.
+This means the placement decisions were guided by the cost function that was minimized in the search, which is the estimated typing work according to our model.
+While we cannot follow the rationale behind each placement choice, we can examine the typing work model to get some basic understanding.
+
+=== Home Row
+
+A little ergonomics experiment first:
+
+Let your arms hang down at the side of your body, all relaxed including hands and fingers.
+Close your eyes.
+Now carefully place your fingertips on a flat surface, as if you would be typing there.
+Make sure your hands and fingers are still fully relaxed.
+Open your eyes and observe where your fingertips landed.
+This is your actual "home row" in relaxed position.
+
+Traditionally, the home row has been defined as four keys for each hand in the middle row.
+In my observations, the middle and ring finger settle about half a key above the middle row, when relaxed.
+Therefore the "home row" should also consider keys from the upper row:
+
+image::HomeRow.png[]
+
+This is just the starting point for the ergonomics considered in MarbleRun, and the typing work model derived from that.
+
+=== Installation
+
+Windows::
+Please download the Microsoft Keyboard Layout Creator to open the link:Windows/MarbleRun/MarbleRun.klc[MarbleRun.klc] file from this repo.
+It will create keyboard layouts with installers, make sure to choose the right architecture (typically amd64).
+For convenience, there are also ready-made installers in a subfolder of this repo, but it is bad practice security-wise.
+
+Xorg and Wayland::
+Patching the keyboard layouts system-wide is the most convenient and reliable option currently, sorry about this.
+Patches can be found in the `xkb` directory of this repo, MarbleRun will then be available as a US keyboard layout variant.
 
