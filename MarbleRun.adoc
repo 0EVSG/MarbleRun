@@ -55,3 +55,46 @@ Patching the keyboard layouts system-wide is the most convenient and reliable op
 Patches can be found in the `xkb` directory of this repo, for the `rules/base.xml`, `rules/evdev.xml` and `symbols/us` files of the xkb package.
 MarbleRun will then be available as a US keyboard layout variant.
 
+
+== Ergonomics
+
+=== Design Principles
+
+For a critique of the standard QWERTY layout and its core issues, I recommend to read the Wikipedia article on link:https://en.wikipedia.org/wiki/Dvorak_keyboard_layout[Dvorak keyboard layout].
+MarbleRun shares some of the design principles with Dvorak, although the definition of home row is different:
+
+----
+Letters should be typed by alternating between hands.
+----
+
+----
+For maximum speed and efficiency, the most common letters and bigrams should be typed on the home row.
+----
+
+Noteworthy parallels with Dvorak include the arrangement of vowels on the left hand side.
+In case of MarbleRun, this solution was found through heuristic search, as a consequence of the typing work model favoring hand alternation.
+
+Some design principles of Dvorak were decidedly *not* applied to MarbleRun:
+
+----
+The least common letters should be on the bottom row which is the hardest row to reach.
+----
+That is only true for the middle and ring fingers, which naturally rest further away from the bottom row.
+----
+The right hand should do more of the typing because most people are right-handed.
+----
+This may help adoption, but goes against efficiency and universality.
+----
+Bigrams should not be typed with adjacent fingers.
+----
+For trained touch typists this is not a problem, unless the keys are too close together.
+----
+Stroking should generally move from the edges of the board to the middle.
+----
+Again, this is just a matter of training, think of piano players routinely stroking outwards.
+
+Instead, the design of MarbleRun relies on an explicit typing work model, to quantify what is efficient and ergonomic to reach.
+It expresses the movement and work needed to type a sequence of keys.
+The work is mostly linear with the distance traveled by hand and fingers, but there are exceptions.
+Apart from hand alternation, finger rolls influence the estimated typing work in a positive way.
+
