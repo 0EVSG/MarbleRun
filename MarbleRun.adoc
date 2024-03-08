@@ -98,3 +98,32 @@ It expresses the movement and work needed to type a sequence of keys.
 The work is mostly linear with the distance traveled by hand and fingers, but there are exceptions.
 Apart from hand alternation, finger rolls influence the estimated typing work in a positive way.
 
+=== Finger Rolls
+
+While typing multiple keys with a single hand, we observe that certain pairs of keys are in comfortable reach of each other and rather effortless to press.
+These pairs, known as _finger rolls_, enable rapid keystrokes, as one finger can initiate the press on the second key while the other finger is still releasing the first key.
+
+In the MarbleRun typing work model, finger rolls are characterized by the following criteria:
+
+* The two keys are pressed by different fingers of the same hand.
+* The second key can be comfortably reached while holding the first key.
+
+While the first criterion is trivial, determining comfortable reach requires a closer examination of hand anatomy.
+It's essential to note that we only consider the relative positions of keys to each other, allowing the hand to move freely across the keyboard without being constrained to the home row.
+Since we neglect the hand position here, this approach leaves us with three degrees of freedom: Individual finger reach, finger spread, and wrist angle.
+
+Here is an opportunity to conduct another simple self-experiment:
+Hold your typing hand at the wrist to fix it, and evaluate the reach of your fingers.
+Confirm that the keys you claim to reach are indeed comfortable to press.
+
+The range of an individual finger is surprisingly limited in the context of typing.
+For MarbleRun, finger rolls encompass the combined forward and backward ranges of involved fingers, with the hand positioned to comfortably access both keys.
+
+In addition to the flexibility of finger joints, fingers can also spread.
+This greatly extends the horizontal range for finger rolls.
+The index finger spreads notably further than the other fingers. Given its pivot this lets it reach well into the middle of the bottom row on the keyboard.
+
+Lastly, the angle of the whole hand, induced by horizontal wrist tilt, provides an additional degree of freedom.
+Although comfortable within narrow limits, it contributes to the overall finger range.
+In particular, it allows finger rolls such as the index finger in the bottom row while the little finger is in the middle row of the keyboard.
+
