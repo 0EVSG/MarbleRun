@@ -120,9 +120,11 @@ image::FingerReach.png[]
 
 The range of an individual finger is surprisingly limited in the context of typing.
 For MarbleRun, finger rolls encompass the combined forward and backward ranges of involved fingers, with the hand positioned to comfortably access both keys.
-Given the relaxed position, this means that we can finger roll in the middle row (the traditional home row), when we retract the ring and middle finger a bit.
+Given our relaxed position, this means that we can finger roll in the middle row (the traditional home row), when we retract the ring and middle finger a bit.
 But we can also roll to ring and middle finger on the upper row, with little and index finger still in the middle row.
 This results in two four-key sets of home row quality per hand, with the positions of little and index finger playing a crucial part in both sets.
+
+image::FingerSpread.png[]
 
 In addition to the flexibility of finger joints, fingers can also spread.
 This greatly extends the horizontal range for finger rolls.
