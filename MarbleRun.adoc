@@ -130,6 +130,8 @@ In addition to the flexibility of finger joints, fingers can also spread.
 This greatly extends the horizontal range for finger rolls.
 The index finger spreads notably further than the other fingers. Given its pivot this lets it reach well into the middle of the bottom row on the keyboard.
 
+image::WristAngle.png[]
+
 Lastly, the angle of the whole hand, induced by horizontal wrist tilt, provides an additional degree of freedom.
 Although comfortable within narrow limits, it contributes to the overall finger range.
 In particular, it allows finger rolls such as the index finger in the bottom row while the little finger is in the middle row of the keyboard.
