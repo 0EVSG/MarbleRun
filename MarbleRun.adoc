@@ -11,18 +11,23 @@ Optimized using a sophisticated typing work model based on hand anatomy, this re
 
 === The Layout
 
-image::MarbleRun.png[]
+.The MarbleRun layout as shown in KTouch.
+image::MarbleRun.png[MarbleRun layout in KTouch]
 
 MarbleRun differs substantially from the standard QWERTY keyboard layout:
 
 * Alphabet letters are placed in a completely different order.
 * Comparison and logic symbols are consolidated in the number row.
-* Underscores and asterisks are relocated to the alphabet rows.
+* Underscore and asterisk are relocated to the alphabet rows.
 * Parentheses, brackets and punctuation change both position and shift partners.
 
-Although some adjustments were made manually, the primary arrangement within the alphabet rows was determined through a heuristic search across all possible layouts.
-This means the placement decisions were guided by the cost function that was minimized in the search, which is the estimated typing work according to our model.
-While we cannot follow the rationale behind each placement choice, we can examine the typing work model to get some basic understanding.
+Although some adjustments were made beforehand, the primary arrangement within the alphabet rows was determined programmatically.
+From a heuristic search across all possible layouts, MarbleRun was found as a solution that minimizes the estimated typing work according to our model.
+It's not feasible to follow the rationale behind each placement choice.
+But the following chapters should provide enough insight for the reader to comprehend whether MarbleRun is plausibly a good fit for their typing needs.
+
+However, the best way to evaluate MarbleRun is to <<_installation, install>> it and try it out.
+Even when still looking up keys, typing some words on a physical keyboard will give an intuitive feel for what MarbleRun is about.
 
 === Home Row
 
@@ -39,9 +44,10 @@ Traditionally, the home row has been defined as four keys for each hand in the m
 In my observations, the middle and ring finger settle about half a key above the middle row, when relaxed.
 Therefore the "home row" should also consider keys from the upper row:
 
-image::HomeRow.png[]
+.The extended home row in MarbleRun, with relaxed position of the fingers.
+image::HomeRow.png[Extended home row in MarbleRun highlighted]
 
-This is just the starting point for the ergonomics considered in MarbleRun, and the typing work model derived from that.
+This is just the starting point for the <<_ergonomics, ergonomics>> considered in MarbleRun, and the typing work model derived from that.
 
 === Installation
 
@@ -54,6 +60,18 @@ Xorg and Wayland::
 Patching the keyboard layouts system-wide is the most convenient and reliable option currently, sorry about that.
 Patches can be found in the `xkb` directory of this repo, for the `rules/base.xml`, `rules/evdev.xml` and `symbols/us` files of the xkb package.
 MarbleRun will then be available as a US keyboard layout variant.
+
+=== Caveats
+
+Learning a new keyboard layout is a significant investment of time and effort.
+Apart from the initial learning curve, there's some additional friction to consider:
+
+* The MarbleRun layout is not widely supported, so you may need to install it on every machine you use.
+* Typing most words is so effortless, that you may trip over the occasional difficult letter combination.
+* Abbreviations often result in letter sequences that MarbleRun is not optimized for, e.g. Unix commands.
+* Some frameworks and APIs use naming prefixes with letters at an awkward position in MarbleRun, e.g. Qt.
+* Left hand shortcuts like Ctrl-C and Ctrl-V are less comfortable to type.
+* Be ready to relearn your muscle memory if you are a VI or Emacs user.
 
 
 == Ergonomics
@@ -72,7 +90,7 @@ For maximum speed and efficiency, the most common letters and bigrams should be 
 ----
 
 Noteworthy parallels with Dvorak include the arrangement of vowels on the left hand side.
-In case of MarbleRun, this solution was found through heuristic search, as a consequence of the typing work model favoring hand alternation.
+In case of MarbleRun, this solution was found programmatically, as a consequence of the typing work model favoring hand alternation.
 
 Some design principles of Dvorak were decidedly *not* applied to MarbleRun:
 
@@ -112,11 +130,12 @@ While the first criterion is trivial, determining comfortable reach requires a c
 It's essential to note that we only consider the relative positions of keys to each other, allowing the hand to move freely across the keyboard without being constrained to the home row.
 Since we neglect the hand position here, this approach leaves us with three degrees of freedom: Individual finger reach, finger spread, and wrist angle.
 
-Here is an opportunity to conduct another simple self-experiment:
+Here is an opportunity to conduct another quick self-experiment:
 Hold your typing hand at the wrist to fix it, and evaluate the reach of your fingers.
 Confirm that the keys you claim to reach are indeed comfortable to press.
 
-image::FingerReach.png[]
+.Individual reach of left hand fingers.
+image::FingerReach.png[Individual reach of left hand fingers visualized]
 
 The range of an individual finger is surprisingly limited in the context of typing.
 For MarbleRun, finger rolls encompass the combined forward and backward ranges of involved fingers, with the hand positioned to comfortably access both keys.
@@ -124,13 +143,15 @@ Given our relaxed position, this means that we can finger roll in the middle row
 But we can also roll to ring and middle finger on the upper row, with little and index finger still in the middle row.
 This results in two four-key sets of home row quality per hand, with the positions of little and index finger playing a crucial part in both sets.
 
-image::FingerSpread.png[]
+.Left hand fingers spread away from the little finger.
+image::FingerSpread.png[Left hand fingers spread away from the little finger visualized]
 
 In addition to the flexibility of finger joints, fingers can also spread.
 This greatly extends the horizontal range for finger rolls.
 The index finger spreads notably further than the other fingers. Given its pivot this lets it reach well into the middle of the bottom row on the keyboard.
 
-image::WristAngle.png[]
+.Tilting the left hand from the wrist.
+image::WristAngle.png[Tilting the left hand from the wrist visualized]
 
 Lastly, the angle of the whole hand, induced by horizontal wrist tilt, provides an additional degree of freedom.
 Although comfortable within narrow limits, it contributes to the overall finger range.
