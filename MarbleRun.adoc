@@ -173,12 +173,36 @@ To find the best keyboard layout then becomes an optimization problem, as we can
 
 === Bigram Frequencies
 
-Bigrams are two letter sequences in written text and a natural fit to measure typing work.
+Bigrams are two letter sequences in written text, and a natural fit to measure typing work.
 Based on our ergonomic model, we can estimate the typing work of the transition from the first to the second letter in a bigram.
-To compute the total estimated typing work of a keyboard layout, we then need the frequency of each bigram in the text.
+To compute the total estimated typing work of a keyboard layout, we then use the frequency of each bigram in the text.
 For MarbleRun, the bigram frequencies were precomputed from a large corpus of English text and source code of popular programming languages.
 
 Intrestingly, the differences in bigram frequencies between English text and source code are not as pronounced as one might expect.
 While source code shows increased frequencies of punctuation and operator symbols, it doesn't have a significant effect on the relative frequencies of alphabet letters.
 Documentation and variable naming make up large parts of source code, and are typically written in English.
-This is why MarbleRun fits both English text and programming contexts well.
+This is why MarbleRun suits both English text and programming contexts well.
+
+=== Typing Work
+
+As a general rule, the estimated typing work is defined as the overall movement of the fingers and both hands.
+For a transition from key A to key B, we estimate the manual work to be
+
+. Release key A
+. Hand and finger travel to reach key B
+. Press key B
+
+This is measured separately for each hand.
+When more than one hand is involved, we add the manual work of both hands.
+Some characters are typed in combination with the shift key.
+Therefore, key A or B may also be the shift key, to complement the character key typed with the other hand.
+In case a hand was idle, there is no release of key A, and we count the travel to key B from the relaxed hand position on the home row.
+
+In accordance with our ergonomic model, we apply the following adjustments to the total typing work:
+
+* The space key, pressed with the thumb, is reachable from any position.
+* To favor hand alternation, omit the release of key A when the second character is simply typed with the other hand.
+* For finger rolls, skip the release of key A.
+
+Remarkably, a space between words or a hand alternation resets the hand position in our model. 
+In terms of optimal key placement, this relaxes the necessity to group letters in close reach to each other.
