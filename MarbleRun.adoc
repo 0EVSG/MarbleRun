@@ -186,7 +186,7 @@ This is why MarbleRun suits both English text and programming contexts well.
 === Typing Work
 
 As a general rule, the estimated typing work is defined as the overall movement of the fingers and both hands.
-For a transition from key A to key B, we estimate the manual work to be
+For a transition from key A to key B, we estimate the manual work to consist of
 
 . Release key A
 . Hand and finger travel to reach key B
@@ -198,7 +198,7 @@ Some characters are typed in combination with the shift key.
 Therefore, key A or B may also be the shift key, to complement the character key typed with the other hand.
 In case a hand was idle, there is no release of key A, and we count the travel to key B from the relaxed hand position on the home row.
 
-In accordance with our ergonomic model, we apply the following adjustments to the total typing work:
+In accordance with our ergonomic model, we apply the following adjustments to the typing work estimation:
 
 * The space key, pressed with the thumb, is reachable from any position.
 * To favor hand alternation, omit the release of key A when the second character is simply typed with the other hand.
@@ -206,3 +206,43 @@ In accordance with our ergonomic model, we apply the following adjustments to th
 
 Remarkably, a space between words or a hand alternation resets the hand position in our model. 
 In terms of optimal key placement, this relaxes the necessity to group letters in close reach to each other.
+
+Note that the estimated typing work per key pair only depends on the physical layout of the keyboard.
+We can precompute the typing work on a given hardware layout, for all transitions between physical keys A and B.
+These values can be stored in a matrix, or computed into compile time constants.
+The latter was done for MarbleRun, using C++ templates, at the expense of longer compilation times.
+
+=== Heuristic Search
+
+With the bigram frequencies and the typing work established, we can now estimate the total typing work of a keyboard layout for our text corpus.
+The keyboard layout defines a mapping from physical keys to characters, and thus also from key pairs to bigrams.
+To calculate the expected work we spend on a specific key pair, we multiply its typing work for one transition with the frequency of the corresponding bigram in the text.
+For the total typing work, we sum up the expected work for all key pairs on the keyboard.
+This is the cost function we aim to minimize.
+
+Finding an optimal keyboard layout with minimal expected typing work poses an interesting optimization problem.
+The search space is factorial in size, with the number of permutations being 34! ≈ 295 * 10^36^ for the 34 keys in the alphabet rows of the US standard keyboard.
+This makes it infeasible to evaluate all possible layouts, even with the computational power provided by modern GPUs.
+
+For MarbleRun, a two-staged approach was taken to tackle this problem:
+
+. Use local optimization on random initial layouts, to find a good solution close to the minimum.
+. Do a recursive search on all layout permutations.
+  Backtrack as early as possible, whenever a heuristic indicates that the search branch cannot surpass the best solution found so far.
+  Use the previously found local minimum as an initial best solution, to jump-start the backtracking heuristic.
+
+Obviously, the heuristic plays a crucial role in the efficiency of the search.
+In a recursion branch, it has to predict a lower bound on work imposed by the remaining layout permutations, as close to the actual minimum as possible.
+Other practical guidelines for the recursive search include:
+
+* Start the recursion with the most significant keys in the home row, they have the highest impact on the overall work.
+* Sort the initial layout to map the most frequent characters to the most significant keys.
+* The expected typing work can be computed partially, for every recursion level, to avoid redundant calculations.
+* Precompute as many constants as possible, to speed up the evaluation of the cost function.
+
+Regarding the last point, while C++ templates made it possible to precompute the typing work for all key pairs, into compile time constants for the recursion, compilation times were 10 minutes and longer.
+Templates are also part of the reason why the source code is not published here, as it is not very readable.
+
+Still, the recursive search may take several days on a modern workstation to find the optimal layout.
+There are many good solutions close to the minimum, because the placement of the low frequency letters has only a small impact.
+On the positive side, the high frequency letters on the home row dominate the total typing work, and there are only few combinations that lead to good solutions.
