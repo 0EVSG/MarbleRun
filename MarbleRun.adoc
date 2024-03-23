@@ -246,3 +246,39 @@ Templates are also part of the reason why the source code is not published here,
 Still, the recursive search may take several days on a modern workstation to find the optimal layout.
 There are many good solutions close to the minimum, because the placement of the low frequency letters has only a small impact.
 On the positive side, the high frequency letters on the home row dominate the total typing work, and there are only few combinations that lead to good solutions.
+
+
+== MarbleRun Explained
+
+As stated before, we cannot follow the rationale behind each placement choice in MarbleRun.
+Not without working through all the frequencies and calculations, that is.
+But we can give some broad explanations for certain parts of the layout:
+
+[qanda]
+Why are the logic and comparison operators in the number row?::
+This makes it easier to type combined operators like `>=`, `|=`, `\->`.
+
+What about the parentheses in the left hand bottom row?::
+Anyone proficient in a C-derived language should see a pattern (`();`) there.
+Even though the order looks backward at first glance, finger rolling outwards is actually more comfortable.
+
+Why are vowels all typed with the left hand?::
+This increases hand alternation because vowels are often interleaved with consonants.
+
+Why are the letters `L` and `N` on the left hand side?::
+They are frequently combined with a variety of consonants.
+It's better to leverage hand alternation here, instead of assigning them to one specific finger roll group on the right hand.
+
+What can you say about the arrangement in the home row?::
+The letters `I` and `E`, `T` and `S` act like pivots.
+`T` and `S` are often typed with `C` `H`, but also with `R` `D`.
+Combinations between `C` `H` and `R` `D` are less frequent.
+Same goes for `I` and `E`, although the correlations there are not as pronounced.
+
+Why are `J` and `Q` so far away from the home row?::
+They are among the least used letters in English, and typically followed by vowels on the left hand side.
+Due to MarbleRun's programming affinity, they are deemed less important than symbols commonly used in source code.
+
+Is there some logic behind which letters are typed with the same finger?::
+Where possible, MarbleRun avoids bigrams being typed with the same finger.
+This is most apparent on the right hand side, where many of the consonants typed with one finger form remarkably uncommon bigrams.
