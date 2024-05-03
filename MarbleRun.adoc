@@ -1,10 +1,11 @@
 = MarbleRun Keyboard Layout
 Florian Walpen <dev@submerge.ch>
 :toc:
+:homepage: https://submerge.ch/Project/MarbleRun/MarbleRun.html
 
 == Introduction
 
-MarbleRun presents a novel keyboard layout tailored for standard keyboards, aiming to enhance typing efficiency across English text and programming contexts.
+{homepage}[MarbleRun] presents a novel keyboard layout tailored for standard keyboards, aiming to enhance typing efficiency across English text and programming contexts.
 The primary objective of MarbleRun is to reduce the overall typing effort required.
 Its layout prioritizes hand alternation and facilitates smooth finger rolls during typing sequences.
 Optimized using a sophisticated typing work model based on hand anatomy, this results in a comfortable and ergonomic typing experience.
@@ -22,12 +23,12 @@ MarbleRun differs substantially from the standard QWERTY keyboard layout:
 * Parentheses, brackets and punctuation change both position and shift partners.
 
 Although some adjustments were made beforehand, the primary arrangement within the alphabet rows was determined programmatically.
-From a heuristic search across all possible layouts, MarbleRun was found as a solution that minimizes the estimated typing work according to our model.
+From a <<_heuristic_search, heuristic search>> across all possible layouts, MarbleRun was found as a solution that minimizes the estimated <<_typing_work, typing work>> according to our model.
 It's not feasible to follow the rationale behind each placement choice.
 But the following chapters should provide enough insight for the reader to comprehend whether MarbleRun is plausibly a good fit for their typing needs.
 
 However, the best way to evaluate MarbleRun is to <<_installation, install>> it and try it out.
-Even when still looking up keys, typing some words on a physical keyboard will give an intuitive feel for what MarbleRun is about.
+Even when still looking up keys in the layout, typing some words on a physical keyboard will give an intuitive feel for what MarbleRun is about.
 
 === Home Row
 
@@ -52,13 +53,13 @@ This is just the starting point for the <<_ergonomics, ergonomics>> considered i
 === Installation
 
 Windows::
-Please download the Microsoft Keyboard Layout Creator to open the link:Windows/MarbleRun/MarbleRun.klc[MarbleRun.klc] file from this repo.
+Please download the Microsoft Keyboard Layout Creator to open the link:Windows/MarbleRun/MarbleRun.klc[MarbleRun.klc] file from this link:https://github.com/0EVSG/MarbleRun[repo].
 It will create keyboard layouts with installers, make sure to choose the right architecture (typically amd64).
-For convenience, there are also ready-made installers in a subfolder of this repo, but it is bad practice security-wise.
+For convenience, there are also ready-made installers in a subfolder of this link:https://github.com/0EVSG/MarbleRun[repo], but it is bad practice security-wise.
 
 Xorg and Wayland::
 Patching the keyboard layouts system-wide is the most convenient and reliable option currently, sorry about that.
-Patches can be found in the `xkb` directory of this repo, for the `rules/base.xml`, `rules/evdev.xml` and `symbols/us` files of the xkb package.
+Patches can be found in the `xkb` directory of this link:https://github.com/0EVSG/MarbleRun[repo], for the `rules/base.xml`, `rules/evdev.xml` and `symbols/us` files of the xkb package.
 MarbleRun will then be available as a US keyboard layout variant.
 
 === Caveats
@@ -67,11 +68,14 @@ Learning a new keyboard layout is a significant investment of time and effort.
 Apart from the initial learning curve, there's some additional friction to consider:
 
 * The MarbleRun layout is not widely supported, so you may need to install it on every machine you use.
-* Typing most words is so effortless, that you may trip over the occasional difficult letter combination.
 * Abbreviations often result in letter sequences that MarbleRun is not optimized for, e.g. Unix commands.
 * Some frameworks and APIs use naming prefixes with letters at an awkward position in MarbleRun, e.g. Qt.
 * Left hand shortcuts like Ctrl-C and Ctrl-V are less comfortable to type.
 * Be ready to relearn your muscle memory if you are a VI or Emacs user.
+
+And my own personal favorite, from my learning experience:
+
+* Typing most words is so effortless, that you may trip over the occasional difficult letter combination.
 
 
 == Ergonomics
@@ -173,7 +177,7 @@ To find the best keyboard layout then becomes an optimization problem, as we can
 
 === Bigram Frequencies
 
-Bigrams are two letter sequences in written text, and a natural fit to measure typing work.
+link:https://en.wikipedia.org/wiki/Bigram[Bigrams] are two letter sequences in written text, and a natural fit to measure typing work.
 Based on our ergonomic model, we can estimate the typing work of the transition from the first to the second letter in a bigram.
 To compute the total estimated typing work of a keyboard layout, we then use the frequency of each bigram in the text.
 For MarbleRun, the bigram frequencies were precomputed from a large corpus of English text and source code of popular programming languages.
@@ -210,7 +214,7 @@ In terms of optimal key placement, this relaxes the necessity to group letters i
 Note that the estimated typing work per key pair only depends on the physical layout of the keyboard.
 We can precompute the typing work on a given hardware layout, for all transitions between physical keys A and B.
 These values can be stored in a matrix, or computed into compile time constants.
-The latter was done for MarbleRun, using C++ templates, at the expense of longer compilation times.
+The latter was done for MarbleRun, using {cpp} templates, at the expense of longer compilation times.
 
 === Heuristic Search
 
@@ -237,11 +241,12 @@ Other practical guidelines for the recursive search include:
 
 * Start the recursion with the most significant keys in the home row, they have the highest impact on the overall work.
 * Sort the initial layout to map the most frequent characters to the most significant keys.
-* The expected typing work can be computed partially, for every recursion level, to avoid redundant calculations.
+* Compute the expected typing work incrementally, for every recursion level, to avoid redundant calculations.
 * Precompute as many constants as possible, to speed up the evaluation of the cost function.
 
-Regarding the last point, while C++ templates made it possible to precompute the typing work for all key pairs, into compile time constants for the recursion, compilation times were 10 minutes and longer.
+Regarding the last point, while {cpp} templates made it possible to precompute the typing work for all key pairs, into compile time constants for the recursion, compilation times were 10 minutes and longer.
 Templates are also part of the reason why the source code is not published here, as it is not very readable.
+Modern {cpp} with its more versatile `constexpr` would have helped greatly, but was not available at that time.
 
 Still, the recursive search may take several days on a modern workstation to find the optimal layout.
 There are many good solutions close to the minimum, because the placement of the low frequency letters has only a small impact.
@@ -271,7 +276,7 @@ It's better to leverage hand alternation here, instead of assigning them to one 
 
 What can you say about the arrangement in the home row?::
 The letters `I` and `E`, `T` and `S` act like pivots.
-`T` and `S` are often typed with `C` `H`, but also with `R` `D`.
+`T` and `S` are often typed with `C` `H`, but also with `R` (`D` is mostly there for `R`).
 Combinations between `C` `H` and `R` `D` are less frequent.
 Same goes for `I` and `E`, although the correlations there are not as pronounced.
 
@@ -281,4 +286,4 @@ Due to MarbleRun's programming affinity, they are deemed less important than sym
 
 Is there some logic behind which letters are typed with the same finger?::
 Where possible, MarbleRun avoids bigrams being typed with the same finger.
-This is most apparent on the right hand side, where many of the consonants typed with one finger form remarkably uncommon bigrams.
+This is most apparent on the right hand side, where many of the consonants typed with one specific finger form remarkably uncommon bigrams.
