@@ -162,6 +162,10 @@ Lastly, the angle of the whole hand, induced by horizontal wrist tilt, provides 
 Although comfortable within narrow limits, it contributes to the overall finger range.
 In particular, it allows finger rolls such as the index finger in the bottom row while the little finger is in the middle row of the keyboard.
 
+.Examples of finger rolls from the left index finger on `E` and the right middle finger on `R`.
+image::Rolls.png[Finger rolls from the left index finger and the right middle finger highlighted.]
+
+In combination, this leaves us with a well-defined set of finger rolls for each key on the keyboard.
 
 == Optimization
 
